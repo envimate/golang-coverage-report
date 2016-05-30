@@ -1,0 +1,5 @@
+.idea/*
+work/*
+target/*
+*.iml
+coverage.html
