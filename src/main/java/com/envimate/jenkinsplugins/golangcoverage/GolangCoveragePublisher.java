@@ -40,7 +40,7 @@ import java.io.PrintStream;
  */
 public class GolangCoveragePublisher extends Recorder implements SimpleBuildStep {
     private final String outFilePath;
-    private final static String COMMAND_TEMPLATE = "go tool cover -html=%s -o coverage.html";
+    private final static String COMMAND_TEMPLATE = "/bin/bash -c \"go tool cover -html=%s -o coverage.html\"";
 
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor public GolangCoveragePublisher(String outFilePath) {
@@ -80,8 +80,8 @@ public class GolangCoveragePublisher extends Recorder implements SimpleBuildStep
 
         String cmdStr = String.format(COMMAND_TEMPLATE, outFilePath);
 
-        launcher.launch().cmdAsSingleString(cmdStr).envs(System.getenv())
-            .stderr(taskListener.getLogger()).stdout(taskListener.getLogger()).pwd(target).join();
+        launcher.launch().cmdAsSingleString(cmdStr).envs(run.getEnvironment(taskListener))
+            .stderr(taskListener.getLogger()).stdout(taskListener.getLogger()).pwd(workspace).join();
 
         workspace.copyRecursiveTo("**/*.html", target);
 
