@@ -14,7 +14,7 @@ import java.io.IOException;
 public class GolangCoverageReportBuildAction implements Action {
     public static final String BASE_URL = "golang-coverage-report";
     public static final String DEFAULT_URL = "coverage.html";
-    public static final String GOLANG_COVERAGE_ICON = "/plugin/golang-coverage/golang.png";
+    public static final String GOLANG_COVERAGE_ICON = "/plugin/golang-coverage-report/golang.png";
     private final Run<?, ?> run;
 
     public GolangCoverageReportBuildAction(Run<?, ?> run) {
